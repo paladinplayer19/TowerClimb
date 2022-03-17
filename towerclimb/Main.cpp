@@ -1,15 +1,18 @@
 #include <SFML/Graphics.hpp>
+#include "Player.h"
 
 int main()
 {
 
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML Works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(700, 700), "TowerClimb");
+
+	sf::Clock gameClock;
+
+	Player playerInstance;
 
 	while (window.isOpen())
 	{
-
+		sf::Time frameTime = gameClock.restart();
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -17,8 +20,18 @@ int main()
 				window.close();
 		}
 
+
+		playerInstance.Update(frameTime);
+
+
+
+
+
+
 		window.clear();
-		window.draw(shape);
+
+		playerInstance.Draw(window);
+
 		window.display();
 
 	}
